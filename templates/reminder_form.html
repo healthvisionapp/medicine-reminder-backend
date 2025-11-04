@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Medicine Reminder</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #fff0f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      form {
+        background: white;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        width: 320px;
+      }
+      h2 {
+        text-align: center;
+        color: #7dacb5;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
+      button {
+        background-color: #7dacb5;
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #6a9ca3;
+      }
+      .msg {
+        text-align: center;
+        margin-bottom: 8px;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="POST" action="/set_reminder">
+      {% if success %}
+      <div class="msg">✅ Reminder saved successfully!</div>
+      {% endif %}
+      <h2>💊 Set Reminder</h2>
+
+      <label>Medicine name</label>
+      <input type="text" name="medicine" required />
+
+      <label>Dosage</label>
+      <input type="text" name="dosage" required />
+
+      <label>Time (24hr format)</label>
+      <input type="time" name="time" required />
+
+      <label>
+        <input type="checkbox" name="daily" />
+        Daily Reminder
+      </label>
+
+      <input type="hidden" name="idToken" id="idToken" />
+      <input type="hidden" name="uid" id="uid" />
+
+      <button type="submit">Save Reminder</button>
+    </form>
+  </body>
+</html>

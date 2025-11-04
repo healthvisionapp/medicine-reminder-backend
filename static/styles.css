@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #f8f8f8; /* soft pink background */
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+
+.title {
+    font-size: 24px;
+    color: #7dacb5; /* main pink */
+    text-align: center;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 3;
+}
+
+.flash {
+    background-color: #e0ffe0;
+    color: green;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.form-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(192, 44, 125, 0.3); /* pink shadow with more opacity */
+}
+
+.input {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #7dacb5; /* pink border */
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: black;
+}
+
+.switch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.switch-label {
+    color: black; /* pink text */
+    font-size: 16px;
+}
+
+.btn {
+    width: 100%;
+    background: linear-gradient(90deg, #7dacb5 0%, #8db1b8 100%); /* same gradient as signInButton */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(124, 172, 181, 0.5);
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(90deg, #8db1b8 0%, #7dacb5 100%);
+}
