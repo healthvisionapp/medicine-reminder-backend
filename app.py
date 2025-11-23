@@ -12,19 +12,18 @@ app = Flask(__name__)
 firebase_secret = os.getenv("FIREBASE_SERVICE_ACCOUNT")
 
 if firebase_secret:
-    # 🔒 Load secret from environment
     cred = credentials.Certificate(json.loads(firebase_secret))
 else:
-    # 🧑‍💻 Local development fallback
     cred = credentials.Certificate("serviceAccountKey.json")
 
 firebase_admin.initialize_app(cred)
+db = firestore.client()
 print("✅ Firebase initialized successfully!")
 
 # --- Pakistan timezone ---
 PK_TZ = pytz.timezone("Asia/Karachi")
 
-# --- Helper ---
+# --- Helper: Convert time string to next datetime ---
 def get_next_datetime_from_time_str(time_str: str):
     now = datetime.now(PK_TZ)
     target = datetime.strptime(time_str, "%H:%M").replace(
@@ -34,11 +33,10 @@ def get_next_datetime_from_time_str(time_str: str):
         target += timedelta(days=1)
     return target
 
-
+# --- Frontend form ---
 @app.route("/", methods=["GET"])
 def index():
     return render_template("reminder_form.html", success=False)
-
 
 @app.route("/set_reminder", methods=["POST"])
 def set_reminder():
@@ -74,13 +72,11 @@ def set_reminder():
     db.collection("users").document(uid).collection("medicines").add(reminder_data)
     print(f"✅ Reminder saved for {medicine} at {time_str}")
 
-    # Return form again (fields reset)
     return render_template("reminder_form.html", success=True)
 
-
+# --- Polling endpoint (React Native frontend) ---
 @app.route("/alarm_status", methods=["GET"])
 def alarm_status():
-    """Frontend polls this every 30s"""
     now = datetime.now(PK_TZ)
     current_time = now.strftime("%H:%M")
 
@@ -98,12 +94,10 @@ def alarm_status():
 
     return jsonify({"alarm": False})
 
-
+# --- Health check ---
 @app.route("/health")
 def health():
     return "ok", 200
 
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
-
