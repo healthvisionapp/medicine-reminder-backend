@@ -1,78 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Medicine Reminder</title>
-    <style>
-      body {
-        font-family: "Poppins", sans-serif;
-        background: #fff0f5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      form {
-        background: white;
-        padding: 25px 30px;
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        width: 320px;
-      }
-      h2 {
-        text-align: center;
-        color: #7dacb5;
-      }
-      input,
-      button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-      }
-      button {
-        background-color: #7dacb5;
-        color: white;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-      }
-      button:hover {
-        background-color: #6a9ca3;
-      }
-      .msg {
-        text-align: center;
-        margin-bottom: 8px;
-        color: green;
-      }
-    </style>
-  </head>
-  <body>
-    <form method="POST" action="/set_reminder">
-      {% if success %}
-      <div class="msg">✅ Reminder saved successfully!</div>
-      {% endif %}
-      <h2>💊 Set Reminder</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medicine Reminder</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-      <label>Medicine name</label>
-      <input type="text" name="medicine" required />
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* top aligned like chatbot */
+      min-height: 100vh;
+      padding-top: 40px; /* spacing from top */
+    }
 
-      <label>Dosage</label>
-      <input type="text" name="dosage" required />
+    form {
+      background: white;
+      border-radius: 16px;
+      width: 90%;       /* responsive width for mobile */
+      max-width: 400px; /* tablet/desktop limit */
+      padding: 20px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14px;
+    }
 
-      <label>Time (24hr format)</label>
-      <input type="time" name="time" required />
+    h2 {
+      text-align: center;
+      color: #7dacb5;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
 
-      <label>
-        <input type="checkbox" name="daily" />
-        Daily Reminder
-      </label>
+    label {
+      font-weight: 500;
+      margin-bottom: 4px;
+      display: block;
+    }
 
-      <input type="hidden" name="idToken" id="idToken" />
-      <input type="hidden" name="uid" id="uid" />
+    input[type="text"],
+    input[type="time"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
 
-      <button type="submit">Save Reminder</button>
-    </form>
-  </body>
+    input[type="checkbox"] {
+      margin-right: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(90deg, #7dacb5 0%, #8db1b8 100%);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #8db1b8 0%, #7dacb5 100%);
+    }
+
+    /* Small adjustment for checkbox label inline */
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <form method="POST" action="/set_reminder">
+    {% if success %}
+    <script>
+      alert("✅ Reminder saved successfully!");
+    </script>
+    {% endif %}
+
+    <h2>💊 Set Reminder</h2>
+
+    <label>Medicine name</label>
+    <input type="text" name="medicine" required />
+
+    <label>Dosage</label>
+    <input type="text" name="dosage" required />
+
+    <label>Time (24hr format)</label>
+    <input type="time" name="time" required />
+
+    <label class="checkbox-label">
+      <input type="checkbox" name="daily" />
+      Daily Reminder
+    </label>
+
+    <input type="hidden" name="idToken" id="idToken" />
+    <input type="hidden" name="uid" id="uid" />
+
+    <button type="submit">Save Reminder</button>
+  </form>
+</body>
 </html>
